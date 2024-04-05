@@ -17,10 +17,12 @@ function displayMenuItems(menu) {
         category.textContent = key;
         // Append the category element to the menu container
         menuContainer.appendChild(category);
+
         // Create an element to represent a list of items
         const menuItems = document.createElement("ul");
         // Append a list of items element to the menu container
         menuContainer.appendChild(menuItems);
+
         // Loop through the items in the category and create list items
         menu[key].forEach(foodItem => {
             // Create a list item element
@@ -30,34 +32,37 @@ function displayMenuItems(menu) {
             // Attach a click event listener to the list item to add it to the order
             menuItem.addEventListener('click', () => {
                 yourOrder.push(foodItem);
-                addToOrder(yourOrder)
+                addToOrder(foodItem)
             })
             // Append the list item to the list of items
             menuItems.appendChild(menuItem);
             })
         }) 
-        
-        addToOrder(yourOrder);
+     
 }
 
 // Callback function for adding an item to the order
 function addToOrder(itemName) {
     // Get the order items list and the order total element from the HTML
-
+    const orderItems = document.getElementById("order-items");
+    const orderTotal = document.getElementById("order-total");
     // Create a list item for the order
-
+    const listItem = document.createElement("li");
     // Set the text content of the list item to the item name
-
+    listItem.textContent = itemName;
     // Append the list item to the order items list
-
+    orderItems.appendChild(listItem);
     // Calculate and update the total price
-
+    const totalPrice = yourOrder.length * 60;
     // Update the text content of the order total element with the new total
+    orderTotal.textContent = totalPrice;
 }
+
 
 // Function to initialize the menu system
 function initMenuSystem(menu) {
     // Call the function to display menu items
+    displayMenuItems(menu)
 }
 
 // Start the menu system by calling the init function
